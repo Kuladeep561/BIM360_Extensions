@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="https://cdn.autodesk.io/favicon.ico">
+    <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/inspire-tree-dom@4.0.6/dist/inspire-tree-light.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="/main.css">
+
+    <!-- XLS related libraries -->
+    <script src="extensions/js/libraries/Blob.js"></script> <!-- https://github.com/eligrey/Blob.js -->
+    <script src="extensions/js/libraries/FileSaver.min.js"></script> <!-- https://github.com/eligrey/FileSaver.js -->
+    <script src="extensions/js/libraries/xlsx.core.min.js"></script> <!-- https://github.com/SheetJS/js-xlsx -->
+
+    <title>Autodesk Platform Services: EDD-Holding</title>
+</head>
+
+<body>
+    <div id="header">
+        <img class="logo" src="https://cdn.autodesk.io/logo/black/stacked.png" alt="Autodesk Platform Services">
+        <span class="title">| EDD-Holding</span>
+        <button id="login" style="visibility: hidden;">Login</button>
+    </div>
+    <div id="sidebar">
+        <div id="tree"></div>
+    </div>
+    <div id="preview"></div>
+    <div id="overlay"></div>
+    <script id="resizable-sidepanel">
+        function initializeResizable() {
+            $(document).ready(function () {
+                // Make the sidebar resizable
+                $("#sidebar").resizable({
+                    handles: "e", // Set the handle to east (for horizontal resizing)
+                    minWidth: 100, // Set the minimum width
+                    maxWidth: $(window).width() - 100, // Set the maximum width based on the window width
+                    resize: function (event, ui) {
+                        // Adjust the width of the preview window accordingly
+                        $("#preview").css("width", $(window).width() - ui.size.width);
+                    },
+                });
+            });
+        }
+        // Check if jQuery is defined, if not, load it first and then initialize the resizable
+        if (typeof jQuery === "undefined") {
+            var script = document.createElement("script");
+            script.src = "https://code.jquery.com/jquery-3.6.4.min.js";
+            script.onload = initializeResizable;
+            document.head.appendChild(script);
+        } else {
+            initializeResizable();
+        }
+    </script>
+
+    <script defer src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script defer src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script defer src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <script defer src="https://unpkg.com/inspire-tree@4.3.1/dist/inspire-tree.js"></script>
+    <script defer src="https://unpkg.com/inspire-tree-dom@4.0.6/dist/inspire-tree-dom.min.js"></script>
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="/main.js" type="module"></script>
+</body>
+
+</html>
